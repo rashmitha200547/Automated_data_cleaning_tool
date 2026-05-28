@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply transition-colors duration-300;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: linear-gradient(135deg, #0a0e27 0%, #050810 50%, #0a0e27 100%);
+}
+
+body {
+  @apply bg-cyber-dark text-cyber-text font-body;
+  background-attachment: fixed;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Grid background effect */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.1) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+main, .app-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 212, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 255, 0.6);
+}
+
+/* Selection */
+::selection {
+  background: rgba(0, 212, 255, 0.3);
+  color: #00d4ff;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-display font-bold;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  @apply text-4xl md:text-5xl;
+}
+
+h2 {
+  @apply text-3xl md:text-4xl;
+}
+
+h3 {
+  @apply text-2xl md:text-3xl;
+}
+
+/* Button base styles */
+.btn-base {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-200;
+}
+
+.btn-primary {
+  @apply btn-base bg-cyber-accent text-cyber-dark hover:shadow-[0_0_20px_rgba(0,212,255,0.6)] hover:scale-105;
+}
+
+.btn-secondary {
+  @apply btn-base bg-cyber-border text-cyber-text hover:bg-cyber-accent hover:text-cyber-dark;
+}
+
+.btn-ghost {
+  @apply btn-base text-cyber-accent hover:bg-cyber-border;
+}
+
+/* Card styles */
+.card {
+  @apply bg-cyber-card border border-cyber-border rounded-xl backdrop-blur-md bg-opacity-80;
+}
+
+.card-hover {
+  @apply card hover:border-cyber-accent transition-all duration-300;
+}
+
+.card-hover:hover {
+  @apply shadow-glow;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #00d4ff 0%, #00f5a0 50%, #ff006e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphism effect */
+.glass {
+  @apply backdrop-blur-xl bg-white bg-opacity-10 border border-white border-opacity-10 rounded-xl;
+}
+
+/* Input styles */
+input, textarea, select {
+  @apply bg-cyber-darker border border-cyber-border rounded-lg px-3 py-2 text-cyber-text placeholder-cyber-text-dim focus:outline-none focus:border-cyber-accent focus:shadow-glow;
+}
+
+/* Loading pulse */
+.pulse-border {
+  border: 1px solid;
+  border-image: linear-gradient(90deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 212, 255, 0.8) 50%, rgba(0, 212, 255, 0.2) 100%) 1;
+  animation: shimmer 2s infinite;
+  background-position: -1000px 0;
+}
+
+/* Custom scrollbar for inner containers */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.2);
+  border-radius: 2px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 212, 255, 0.4);
+}
+
+/* Float animation for background elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
