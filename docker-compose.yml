@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./automated_data_cleaning/redis_data:/data
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./automated_data_cleaning/mongo_data:/data/db
+    restart: unless-stopped
+
+  python-engine:
+    build:
+      context: ./python-engine
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./python-engine:/app
+      - ./automated_data_cleaning/python_data:/app/data_sessions
+    env_file:
+      - ./python-engine/.env
+    environment:
+      - DATA_DIR=/app/data_sessions
+      - CHECKPOINTER_DB=/app/checkpoints.db
+      - MONGO_URI=mongodb://mongodb:27017
+    depends_on:
+      - redis
+      - mongodb
+    restart: unless-stopped
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+      - ./automated_data_cleaning/backend_uploads:/app/uploads
+    env_file:
+      - ./backend/.env
+    environment:
+      - PYTHON_ENGINE_URL=http://python-engine:8000
+      - REDIS_URL=redis://redis:6379
+      - MONGO_URI=mongodb://mongodb:27017/automated_data_cleaning
+    depends_on:
+      - redis
+      - python-engine
+      - mongodb
+    restart: unless-stopped
+    command: npm run dev
+

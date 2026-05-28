@@ -1,0 +1,47 @@
+# Node
+node_modules/
+npm-debug.log*
+/dist
+/build
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Backend
+backend/node_modules/
+
+# Python
+venv/
+.env
+.python-version
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+*.egg-info/
+
+# Data
+uploads/
+*.sqlite
+*.db
+checkpoints.db
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Misc
+.env.local
+.env.*.local
